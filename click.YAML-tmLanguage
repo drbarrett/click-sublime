@@ -1,0 +1,157 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+
+# Click Modular Router Configuration File Syntax
+#
+# Copyright 2015 Dan Barrett (barrettd@cs.cmu.edu)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Click
+scopeName: source.click
+fileTypes: [click]
+uuid: 5739a1e6-06e5-4105-9d61-b7ba81080ef6
+
+patterns:
+- comment: single line comment
+  name: comment.line.double-slash.click
+  begin: //
+  end: $
+  captures:
+    '0': {name: punctuation.definition.comment.click}
+  patterns:
+  - name: support.other.click
+    match: 'FIXME:|TODO:'
+
+- comment: comment block
+  name: comment.block.click
+  begin: /\*
+  end: \*/
+  captures:
+    '0': {name: punctuation.definition.comment.click}
+  patterns:
+  - match: 'FIXME:|TODO:'
+    name: support.other.click
+
+- comment: MAC Address
+  name: constant.other.click
+  match: ([[:xdigit:]]{2}:){5}[[:xdigit:]]{2}
+
+- comment: IPv6 Address
+  name: constant.other.click
+  match: ([[:xdigit:]]{1,4}:){7}[[:xdigit:]]{1,4}
+
+- comment: IPv4 Address
+  name: constant.other.click
+  match: (\d{1,3}\.){3}\d{1,3}
+
+- comment: constants
+  name: constant.language.click
+  match: __REST__
+
+- comment: constants
+  name: constant.language.click
+  match: (?i:input|output)
+
+- comment: hex constants
+  name: constant.numeric.click
+  match: \b0x[[:xdigit:]]+\b
+
+- comment: numeric constants
+  name: constant.numeric.click
+  match: \b[[:digit:]]+\b
+
+# click allows hex digits without a 0x prefix which also matches strings like the word ADD.
+# hacking this rule to look for nn/nn combinations
+# I'd prefer some other way of doing this
+- comment: numeric constants
+  match: /([[:xdigit:]]+)\b
+  captures: 
+    '1': { name: constant.numeric.click }
+
+- comment: keywords
+  name: keyword.other.click
+  match: \b(?i:require|library|define|elementclass|write|read)\b
+
+- comment: operators
+  name: keyword.operator.click
+  match: (::|->|=>|\[|\])
+
+- name: string.quoted.double.click
+  begin: '"'
+  beginCaptures:
+    '0': {name: punctuation.definition.string.begin.click}
+  end: '"'
+  endCaptures:
+    '0': {name: punctuation.definition.string.end.click}
+  patterns:
+  - name: variable.other.click
+    match: \$[A-Za-z_]\w*
+  - name: constant.character.escape.click
+    match: (?x:\\(?:["\\/bfnrt]|u[0-9a-fA-F]{4}))
+
+- comment: variable names - $foo
+  name: variable.other.click
+  match: \$[A-Za-z_]\w*
+
+- comment Elements:
+  name: support.function.click
+  match: \b(?i:ACKResponder|ACKResponder2|ACKRetrySender|ACKRetrySender2|AdaptiveRED|AddressInfo|AddressTranslator|AggregateCounter|AggregateFilter|AggregateFirst|AggregateIP|AggregateIPAddrPair|AggregateIPFlows|AggregateLast|AggregateLength|AggregatePacketCounter|AggregatePaint|AiroInfo|Align|AlignmentInfo|AnonymizeIPAddr|ARPFaker|ARPPrint|ARPQuerier|ARPResponder|ARPTable|AssociationRequester|AssociationResponder|AthdescDecap|AthdescEncap|AutoRateFallback|AvailableRates|AverageCounter|BalancedThreadSched|BandwidthMeter|BandwidthRatedSplitter|BandwidthRatedUnqueue|BandwidthShaper|BeaconScanner|BeaconSource|BeaconTracker|BigHashMapTest|Block|BottleneckMetric|Burster|CalculateTCPLossEvents|ChangeUID|ChatterSocket|CheckARPHeader|CheckAverageLength|CheckCRC32|CheckDHCPMsg|CheckGREHeader|CheckGridHeader|CheckICMPHeader|CheckIP6Header|CheckIPHeader|CheckIPHeader2|CheckLength|CheckPacket|CheckPaint|CheckTCPHeader|CheckUDPHeader|Classifier|CompareBlock|ComparePackets|ConfParseTest|ControlSocket|Counter|CPUQueue|CPUSwitch|CycleCountAccum|DecIP6HLIM|DecIPTTL|DelayShaper|DelayUnqueue|DHCPClassifier|DHCPClient|DHCPICMPEncap|DHCPLeaseHash|DHCPLeasePool|DHCPServerACKorNAK|DHCPServerOffer|DHCPServerRelease|DirectIPLookup|Discard|DiscardNoFree|DriverManager|DropBroadcasts|DRRSched|DSDVRouteTable|DSRArpTable|DSRRouteTable|DynamicUDPIPEncap|E2ELossMetric|EnsureEther|EraseIPPayload|Error|EstimateRouterRegion|EtherCount|EtherEncap|EtherMirror|EtherSwitch|ETX2Metric|ETXMetric|ExtraDecap|ExtraEncap|FastTCPFlows|FastUDPFlows|FastUDPSource|FastUDPSourceIP6|FilterByGridHops|FilterByRange|FilterFailures|FilterPhyErr|FilterTX|FixDstLoc|FixIPSrc|FixSrcLoc|FloodingLocQuerier|FromCapDump|FromDAGDump|FromDevice|FromDump|FromHost|FromIPSummaryDump|FromNetFlowSummaryDump|FromNLANRDump|FromRawSocket|FromSocket|FromTcpdump|FromUserDevice|FrontDropQueue|FTPPortMapper|FTPPortMapper6|GetIP6Address|GetIPAddress|GetSSRC|GREEncap|GridEncap|GridGatewayInfo|GridHeaderInfo|GridLocationInfo|GridLocationInfo2|GridLogger|GridProbeHandler|GridProbeReplyReceiver|GridProbeSender|GridRouteTable|GridTxError|HashSwitch|HopcountMetric|HostEtherFilter|ICMP6Checksum|ICMP6Error|ICMPError|ICMPPingEncap|ICMPPingResponder|ICMPPingRewriter|ICMPPingSource|ICMPRewriter|Idle|IncrementSeqNo|InferIPAddrColors|InfiniteSource|IP6Fragmenter|IP6Mirror|IP6NDAdvertiser|IP6NDSolicitor|IP6Print|IPAddrColorPaint|IPAddrPairRewriter|IPAddrRewriter|IPClassifier|IPCP|IPEncap|IPFilter|IPFlowRawSockets|IPFragmenter|IPGWOptions|IPInputCombo|IPMirror|IPNameInfo|IPOutputCombo|IPPrint|IPRateMonitor|IPReassembler|IPRewriter|IPRewriterPatterns|IPRouteTable|IPsecAES|IPsecAuthHMACSHA1|IPsecAuthSHA1|IPsecDES|IPsecEncap|IPsecESPEncap|IPsecESPUnencap|IPsecRouteTable|KernelFilter|KernelHandlerProxy|KernelTap|KernelTun|LCP|LinearIPLookup|LinkStat|LinkTable|LinkTester|LinkTestReceiver|LinkTracker|LinkUnqueue|LinuxIPLookup|LIRMetric|ListenEtherSwitch|LocationTable|LocFromFile|LocQueryResponder|LookupGeographicGridRoute|LookupIP6Route|LookupIPRouteMP|LookupLocalGridRoute|MadwifiRate|MapTRW|MarkIP6Header|MarkIPCE|MarkIPHeader|Message|Meter|MixedQueue|MovementSimulator|MSQueue|MultiQ|NetflowExport|NetflowPrint|NetflowTemplateCache|NotifierQueue|Null|Null1|OpenAuthRequeser|OpenAuthResponder|PacketLogger|PacketLogger2|PacketStore|PacketTest|Paint|PaintSwitch|PaintTee|PEP|PerfCountAccum|PerfCountInfo|PingPong|PokeHandlers|PollDevice|PortInfo|PPPControlProtocol|PPPEncap|PPTPServer|Print|PrintGrid|PrintTXFeedback|PrintWifi|PrioSched|Prism2Decap|Prism2Encap|ProbeResponder|ProbeTXRate|ProgressBar|ProtocolTranslator46|ProtocolTranslator64|PullNull|PullSwitch|PullTee|PushAnno|PushNull|Queue|QueueThreadTest1|QueueThreadTest2|QueueYankTest|QuitWatcher|RadioSim|RadiotapDecap|RadiotapEncap|RadixIPLookup|RadixIPsecLookup|RandomBitErrors|RandomSample|RandomSeed|RandomSource|RandomSwitch|RangeIPLookup|RatedSource|RatedSplitter|RatedUnqueue|RawSocket|ReadAnno|RED|RFC2507Comp|RFC2507Decomp|RIPSend|RoundRobinIPMapper|RoundRobinSched|RoundRobinSwitch|RoundTripCycleCount|RTPClassifier|RXStats|SchedOrderTest|ScheduleInfo|ScheduleLinux|Script|SendGridHello|SendGridLRHello|SetAnnoByte|SetCRC32|SetCycleCount|SetGridChecksum|SetIP6Address|SetIP6DSCP|SetIPAddress|SetIPChecksum|SetIPDSCP|SetPacketType|SetPerfCount|SetRandIPAddress|SetRTS|SetTCPChecksum|SetTimestamp|SetTimestampDelta|SetTXPower|SetTXRate|SetUDPChecksum|Shaper|SimPacketAnalyzer|SimpleLocQuerier|SimplePrioSched|SimpleQueue|SimpleRoundRobinSched|SNMPOidInfo|SNMPTrapSource|SNMPVariableInfo|Socket|SortedIPLookup|SortTest|SourceIPHashMapper|SpinlockAcquire|SpinlockInfo|SpinlockRelease|SplitFirst|StaticIPLookup|StaticPullSwitch|StaticSwitch|StaticThreadSched|StoreData|StoreIPAddress|StoreTimestamp|StrideSched|StrideSwitch|Strip|StripGREHeader|StripIPHeader|StripToNetworkHeader|Suppressor|Switch|TCPCollector|TCPIPSend|TCPMystery|TCPRewriter|Tee|TestIPAddrColors|ThreadMonitor|ThresholdMetric|TimedSink|TimedSource|TimeFilter|TimeRange|TimeSortedSched|TimestampAccum|ToDevice|ToDump|ToHost|ToHostSniffers|ToIPFlowDumps|ToIPSummaryDump|ToRawSocket|ToSimTrace|ToSocket|ToUserDevice|Truncate|UDPIPEncap|UMLSwitch|Unqueue|Unqueue2|Unstrip|UnstripIPHeader|UpdateGridRoutes|UpstreamNotifier|VectorTest|WepDecap|WepEncap|WifiDecap|WifiDefrag|WifiDupeFilter|WifiEncap|WifiFragment|WifiSeq|WirelessInfo|YarvisMetric)\b
+
+#
+#
+# ADDITIONAL SUPPORT FOR XIA (eXpressive Internet Architecture) specific configuration fileTypes
+#
+#
+
+# XIDs
+- comment: XIDs AD:<40 hex chars>
+  name: constant.other.click
+  match: (\w)+\:[[:xdigit:]]{40}
+
+# XIA Specific Elements
+- comment: Top Level elements
+  name: support.class.click
+  match: \b(?i:XIAEndHost|XIARouter[0-9]+Port|XIADualRouter[0-9]+Port|XIADualEndhost)\b
+
+- comment: Config defined Elements
+  name: support.class.click
+  match: \b(?i:XIAFromHost|XIAToHost|GenericPostRouteProc|XIAPacketRoute|RouteEngine|XIALineCard|XIADualLineCard|XIARoutingCore|IPLineCard)\b
+
+- comment: compiled Elements
+  name: support.class.click
+  match: \b(?i:MarkXIAHeader|XARPQuerier|XARPResponder|XARPTable|XCMP|XIACache|XIACheckDest|XIAContentModule|XIADecHLIM|XIAIPEncap|XIANextHop|XIAPaint|XIAPaintSwitch|XIAPrint|XIASelectPath|XIAXIDRouteTable|XIAXIDTypeClassifier|XIAXIDTypeCounter|XLog|Xtransport)\b
+
+# NOTE: xtransport variable collides with xtransport class name
+
+
+# old perf testing
+# clone
+# ip6randomize
+# iprandomize
+# xiarandomize
+# printstats
+# xiaencap
+# xiafastpath
+
+# dead?
+# xroute
+# xiarpc
+# xiatransport
+# xiadhcpserver
+# xiainserthash
+# xcmppingconverter
+# xcmppingsource
+# xiapingresponder
+# xiapingsource
+# xiapingupdate
+
