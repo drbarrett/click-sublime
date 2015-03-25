@@ -130,28 +130,3 @@ patterns:
 - comment: compiled Elements
   name: support.class.click
   match: \b(?i:MarkXIAHeader|XARPQuerier|XARPResponder|XARPTable|XCMP|XIACache|XIACheckDest|XIAContentModule|XIADecHLIM|XIAIPEncap|XIANextHop|XIAPaint|XIAPaintSwitch|XIAPrint|XIASelectPath|XIAXIDRouteTable|XIAXIDTypeClassifier|XIAXIDTypeCounter|XLog|Xtransport)\b
-
-# NOTE: xtransport variable collides with xtransport class name
-
-
-# old perf testing
-# clone
-# ip6randomize
-# iprandomize
-# xiarandomize
-# printstats
-# xiaencap
-# xiafastpath
-
-# dead?
-# xroute
-# xiarpc
-# xiatransport
-# xiadhcpserver
-# xiainserthash
-# xcmppingconverter
-# xcmppingsource
-# xiapingresponder
-# xiapingsource
-# xiapingupdate
-
