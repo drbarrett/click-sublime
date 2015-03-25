@@ -6,7 +6,7 @@ This file also contains extensions for configuration files from the [XIA][xia] (
 
 Installation
 ------------
-### Automatic (not yet supported)
+### Automatic
 * Use [Sublime Package Control][pc]
 * `ctrl+shift+p` then select `Package Control: Install Package`
 * Install Click
