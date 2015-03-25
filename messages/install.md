@@ -3,7 +3,7 @@ Click
 
 Syntax hightlighting for [Click Modular Router][click] configuration files.
 
-This file also contains extensions for configuration files from the [XIA][xia] (eXpressive Internet Architecture) project.
+This file also contains extensions for configuration files from the [XIA][xia] (eXpressive Internet Architeture) project.
 
 <!-- Links -->
 [click: ]http://read.cs.ucla.edu/click/click
